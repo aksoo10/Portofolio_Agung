@@ -1,9 +1,9 @@
 /**
- * Portfolio Agung Aksa - Interactive Functionality
+ * Portfolio Agung Aksa - Interactive Functionality (Tailwind Edition)
  * Full-Stack Web Developer | Laravel & PHP Ecosystem
  */
 
-// Data Detail Proyek untuk Modal Interaktif
+// Data Detail Proyek untuk Modal Interaktif (STAR Method)
 const projectsData = {
   'box-locator': {
     title: 'Website Box Locator',
@@ -86,32 +86,40 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   1. THEME SWITCHER (Dark / Light Mode)
+   1. THEME SWITCHER (Tailwind Dark Mode)
    ========================================================================== */
 function initTheme() {
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   if (!themeToggleBtn) return;
 
   const currentTheme = localStorage.getItem('portfolio-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  updateThemeIcon(currentTheme);
+  applyTheme(currentTheme);
 
   themeToggleBtn.addEventListener('click', () => {
-    const activeTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = activeTheme === 'light' ? 'dark' : 'light';
-    
-    document.documentElement.setAttribute('data-theme', newTheme);
+    const isDark = document.documentElement.classList.contains('dark');
+    const newTheme = isDark ? 'light' : 'dark';
+    applyTheme(newTheme);
     localStorage.setItem('portfolio-theme', newTheme);
-    updateThemeIcon(newTheme);
   });
+}
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+  updateThemeIcon(theme);
 }
 
 function updateThemeIcon(theme) {
   const iconSpan = document.querySelector('#themeToggleBtn .theme-icon');
   if (iconSpan) {
-    iconSpan.innerHTML = theme === 'light' 
-      ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
-      : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+    iconSpan.innerHTML = theme === 'light'
+      ? `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
+      : `<svg class="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
   }
 }
 
@@ -119,32 +127,36 @@ function updateThemeIcon(theme) {
    2. NAVBAR & NAVIGATION
    ========================================================================== */
 function initNavbar() {
-  const header = document.querySelector('.header');
+  const header = document.getElementById('header');
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navLinks = document.getElementById('navLinks');
   const navItems = document.querySelectorAll('.nav-link');
 
   // Sticky header scroll shadow
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      header.classList.add('scrolled');
+    if (window.scrollY > 30) {
+      header.classList.add('shadow-md', 'bg-white/90', 'dark:bg-[#0a0d14]/90');
+      header.classList.remove('bg-white/70', 'dark:bg-[#0a0d14]/70');
     } else {
-      header.classList.remove('scrolled');
+      header.classList.remove('shadow-md', 'bg-white/90', 'dark:bg-[#0a0d14]/90');
+      header.classList.add('bg-white/70', 'dark:bg-[#0a0d14]/70');
     }
   });
 
   // Mobile menu toggle
   if (hamburgerBtn && navLinks) {
     hamburgerBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      const isOpen = navLinks.classList.contains('open');
-      hamburgerBtn.setAttribute('aria-expanded', isOpen);
+      navLinks.classList.toggle('hidden');
+      navLinks.classList.toggle('flex');
     });
 
     // Close mobile menu on click nav item
     navItems.forEach(link => {
       link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
+        if (window.innerWidth < 768) {
+          navLinks.classList.add('hidden');
+          navLinks.classList.remove('flex');
+        }
       });
     });
   }
@@ -160,8 +172,14 @@ function initNavbar() {
       const activeLink = document.querySelector(`.nav-link[href*="${sectionId}"]`);
 
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        navItems.forEach(l => l.classList.remove('active'));
-        if (activeLink) activeLink.classList.add('active');
+        navItems.forEach(l => {
+          l.classList.remove('text-indigo-600', 'dark:text-indigo-400', 'font-bold');
+          l.classList.add('text-slate-600', 'dark:text-slate-300');
+        });
+        if (activeLink) {
+          activeLink.classList.remove('text-slate-600', 'dark:text-slate-300');
+          activeLink.classList.add('text-indigo-600', 'dark:text-indigo-400', 'font-bold');
+        }
       }
     });
   });
@@ -174,26 +192,34 @@ function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
 
+  const activeClasses = ['bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25'];
+  const inactiveClasses = ['bg-slate-100', 'dark:bg-[#182238]', 'text-slate-600', 'dark:text-slate-300', 'hover:bg-slate-200', 'dark:hover:bg-[#1f2c4a]'];
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      filterBtns.forEach(b => {
+        b.classList.remove(...activeClasses);
+        b.classList.add(...inactiveClasses);
+      });
+
+      btn.classList.remove(...inactiveClasses);
+      btn.classList.add(...activeClasses);
 
       const filterValue = btn.getAttribute('data-filter');
 
       projectCards.forEach(card => {
         const category = card.getAttribute('data-category');
         if (filterValue === 'all' || category === filterValue) {
-          card.style.display = 'flex';
+          card.classList.remove('hidden');
           setTimeout(() => {
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
           }, 20);
         } else {
           card.style.opacity = '0';
-          card.style.transform = 'translateY(20px)';
+          card.style.transform = 'translateY(16px)';
           setTimeout(() => {
-            card.style.display = 'none';
+            card.classList.add('hidden');
           }, 250);
         }
       });
@@ -231,20 +257,22 @@ function initProjectModal() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+    if (e.key === 'Escape' && !modalBackdrop.classList.contains('hidden')) {
       closeModal(modalBackdrop);
     }
   });
 }
 
 function openModal(modal) {
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.classList.add('modal-open');
 }
 
 function closeModal(modal) {
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+  document.body.classList.remove('modal-open');
 }
 
 function populateModal(data) {
@@ -260,7 +288,7 @@ function populateModal(data) {
   techContainer.innerHTML = '';
   data.techStack.forEach(tech => {
     const pill = document.createElement('span');
-    pill.className = 'skill-chip primary-tech';
+    pill.className = 'px-3 py-1 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60';
     pill.textContent = tech;
     techContainer.appendChild(pill);
   });
@@ -296,7 +324,6 @@ function copyToClipboard(text, message) {
   navigator.clipboard.writeText(text).then(() => {
     showToast(message);
   }).catch(() => {
-    // Fallback manual
     const tempInput = document.createElement('input');
     tempInput.value = text;
     document.body.appendChild(tempInput);
@@ -313,10 +340,12 @@ function showToast(msg) {
   if (!toast || !toastMsg) return;
 
   toastMsg.textContent = msg;
-  toast.classList.add('show');
+  toast.classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
+  toast.classList.add('opacity-100', 'translate-y-0');
 
   setTimeout(() => {
-    toast.classList.remove('show');
+    toast.classList.remove('opacity-100', 'translate-y-0');
+    toast.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
   }, 3500);
 }
 
@@ -340,13 +369,11 @@ function initContactForm() {
       return;
     }
 
-    // Buat format pesan WhatsApp
+    // Format WhatsApp message
     const waText = `Halo Agung Aksa,\nSaya: *${name}* (${email || 'Email tidak dilampirkan'})\nPerihal: *${subject || 'Peluang Kerja / Proyek'}*\n\nPesan:\n"${message}"`;
     const waUrl = `https://wa.me/6281271959206?text=${encodeURIComponent(waText)}`;
 
-    // Buka WhatsApp di tab baru
     window.open(waUrl, '_blank');
-
     showToast('Membuka WhatsApp untuk mengirim pesan...');
     contactForm.reset();
   });
