@@ -6,14 +6,14 @@
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-Responsive-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/)
 
-> **Website Portofolio Interaktif & Responsif** untuk **Agung Aksa** (Full-Stack Web Developer | Spesialisasi Ekosistem Laravel & PHP). Didesain dengan estetika modern, *clean architecture*, dan ramah untuk peninjauan recruiter maupun tech lead.
+> **Website Portofolio Interaktif & Responsif** untuk **Agung Aksa** (Full-Stack Web Developer). Didesain dengan estetika modern, *clean architecture*, dan ramah untuk peninjauan recruiter maupun tech lead.
 
 ---
 
 ## 🚀 Fitur Unggulan
 
 - **🎨 Modern Aesthetic & Dark/Light Mode:** Didukung sistem tema adaptif (Dark Mode elegan sebagai default dan Light Mode) dengan memori `localStorage`.
-- **⚡ Filter Proyek Real-time:** Pengunjung dapat menyaring proyek berdasarkan kategori (*Web Application, Tugas Akhir/Akademik, Enterprise Tools*).
+- **⚡ Filter Proyek Real-time:** Pengunjung dapat menyaring proyek berdasarkan kategori (*Web Application, Tugas Akhir/Akademik*).
 - **📋 Modal Studi Kasus Proyek (STAR Method):** Menyajikan narasi mendalam untuk setiap proyek:
   - Masalah nyata yang diselesaikan
   - Solusi yang dibangun
@@ -33,7 +33,6 @@
 | **01** | **Website Box Locator** | PT Andritz (Internship) | PHP / Laravel, MySQL, Tailwind, JS | Pemetaan & pelacakan boks logistik workshop industri real-time |
 | **02** | **Sistem Pelepasan Alumni** | Fasilkom UNSRI (Tugas Akhir) | Laravel, PHP 8+, MySQL, Blade, DomPDF | Otomasi 100% verifikasi berkas yudisium & cetak dokumen kelulusan |
 | **03** | **Forum Pengaduan Kinerja OPD** | Bappeda Litbang Kota Palembang | PHP, MySQL, Tailwind CSS, JS | Digitalisasi kanal aduan dan transparansi disposisi tiket kinerja OPD |
-| **04** | **TMS & IMS Power Apps** | PT Andritz (Internship) | Power Apps, SharePoint, Automate | Efisiensi tracking sirkulasi perkakas teknik dan inventaris pabrik |
 
 ---
 

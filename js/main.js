@@ -15,6 +15,7 @@ const projectsData = {
     role: 'Solo Web Developer Intern — Merancang arsitektur basis data, mengembangkan logika backend, serta mendesain antarmuka responsif yang mudah digunakan oleh operator lapangan.',
     techStack: ['PHP / Laravel', 'MySQL', 'Tailwind CSS', 'JavaScript ES6', 'Laragon Local Dev'],
     impact: 'Mempercepat efisiensi waktu pencarian komponen industri, meminimalisir human-error dalam penempatan barang, dan meningkatkan akurasi data inventaris workshop PT Andritz.',
+    image: 'assets/box-locator.png',
     links: {
       github: '#',
       demo: '#',
@@ -30,8 +31,9 @@ const projectsData = {
     problem: 'Alur pendaftaran yudisium dan pelepasan alumni sebelumnya masih manual dan semi-digital, menyebabkan penumpukan berkas fisik, risiko kehilangan lampiran mahasiswa, verifikasi berbelit-belit, serta menyulitkan pembuatan rekapitulasi data kelulusan oleh bagian akademik fakultas.',
     solution: 'Mengembangkan sistem informasi terintegrasi berbasis Laravel dengan alur lengkap: unggah berkas syarat kelulusan, validasi dokumen bertingkat oleh staf akademik, sistem penolakan berkas dengan catatan revisi, pencetakan bukti registrasi otomatis, dan ekspor data alumni.',
     role: 'Solo Full-Stack Developer — Menganalisis proses bisnis, merancang skema relasi database MySQL, mengimplementasikan autentikasi multi-role (Mahasiswa, Staf Akademik, Admin), serta membangun UI antarmuka Blade & Tailwind yang intuitif.',
-    techStack: ['Laravel Framework', 'PHP 8+', 'MySQL', 'Tailwind CSS', 'Blade Engine', 'DomPDF'],
+    techStack: ['PHP', 'MySQL', 'Tailwind CSS', 'JavaScript', 'DomPDF'],
     impact: 'Mendigitalisasi 100% proses pendaftaran pelepasan alumni Fasilkom UNSRI, memangkas waktu verifikasi berkas kelulusan, dan mencegah duplikasi data alumni.',
+    image: 'assets/pelepasan-alumni.png',
     links: {
       github: 'https://github.com/agungaksa',
       demo: '#',
@@ -54,23 +56,6 @@ const projectsData = {
       demo: '#',
       hasRepo: true,
       note: 'Proyek Magang / Kerja Praktik Pemerintah Kota Palembang'
-    }
-  },
-  'power-apps': {
-    title: 'Tools & Inventory Management System (TMS & IMS)',
-    company: 'PT Andritz (Internship 2026)',
-    category: 'Enterprise / Low-Code',
-    badge: 'Enterprise Productivity Tool',
-    problem: 'Sirkulasi peminjaman alat berat khusus/perkakas teknik serta monitoring suku cadang habis pakai rentan mengalami selisih data bila pencatatan masih mengandalkan lembaran form kertas atau spreadsheet manual.',
-    solution: 'Membangun ekosistem aplikasi mobile & tablet internal berbasis Microsoft Power Apps yang terhubung ke basis data terpusat, memfasilitasi pemindaian barcode perkakas kerja, alur persetujuan peminjaman, serta peringatan otomatis ketika batas minimum stok suku cadang tercapai.',
-    role: 'Power Apps Developer Intern — Merancang alur navigasi aplikasi, formulas logika peminjaman, integrasi data, dan validasi formulir input teknisi.',
-    techStack: ['Microsoft Power Apps', 'SharePoint Lists / Dataverse', 'Power Automate', 'Low-Code Automation'],
-    impact: 'Meningkatkan akurasi audit inventaris alat secara berkala, mempercepat sirkulasi checkout/checkin perkakas teknik, dan mencegah hilangnya aset peralatan berharga.',
-    links: {
-      github: '#',
-      demo: '#',
-      hasRepo: false,
-      note: 'Solusi Digital Enterprise PT Andritz'
     }
   }
 };
@@ -292,6 +277,19 @@ function populateModal(data) {
     pill.textContent = tech;
     techContainer.appendChild(pill);
   });
+
+  // Render Image Preview if available
+  const imgContainer = document.getElementById('modalImageContainer');
+  const modalImg = document.getElementById('modalImage');
+  if (imgContainer && modalImg) {
+    if (data.image) {
+      modalImg.src = data.image;
+      modalImg.alt = data.title;
+      imgContainer.classList.remove('hidden');
+    } else {
+      imgContainer.classList.add('hidden');
+    }
+  }
 
   // Render Modal Note / Link
   const noteContainer = document.getElementById('modalNote');

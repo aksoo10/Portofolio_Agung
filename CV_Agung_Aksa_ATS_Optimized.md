@@ -1,7 +1,7 @@
 # CURRICULUM VITAE
 
 ## **AGUNG AKSA**
-**Full-Stack Web Developer | Laravel & PHP Ecosystem Specialist**  
+Full-Stack Web Developer   
 📍 Kota Palembang, Sumatera Selatan | 📞 +62 812-7195-9206 | ✉️ agung.aksa10@gmail.com  
 🔗 GitHub: github.com/agungaksa | 🌐 Portofolio Online: agungaksa.github.io  
 
@@ -15,7 +15,6 @@ Lulusan **Diploma III Manajemen Informatika Universitas Sriwijaya (IPK 3.91 / 4.
 ### **KEAHLIAN UTAMA (TECHNICAL SKILLS)**
 * **Backend & Database:** PHP (PHP 7/8+), Laravel Framework, MySQL, Relational Database Design (ERD & Normalisasi), RESTful API Development, Query Optimization.
 * **Frontend:** HTML5 (Semantic), CSS3 Modern, Tailwind CSS, JavaScript (ES6+), Blade Templating, Responsive Web Design.
-* **Enterprise & Low-Code:** Microsoft Power Apps (TMS - Tools Management System, IMS - Inventory Management System), Dataverse, SharePoint Integration.
 * **Tools & Workflow:** Git, GitHub, Laragon, XAMPP, Postman, Visual Studio Code, Canva, Microsoft Office.
 * **Soft Skills:** Problem Solving, Analytical Thinking, Team Collaboration, Communication, Time Management, Adaptability.
 
@@ -26,8 +25,6 @@ Lulusan **Diploma III Manajemen Informatika Universitas Sriwijaya (IPK 3.91 / 4.
 #### **PT Andritz — Kota Palembang, Sumatera Selatan**
 *Web Developer Intern* | **Agustus 2026 — 2026**
 * **Mengembangkan Website Box Locator PT Andritz:** Membangun aplikasi web internal untuk pemetaan dan pelacakan posisi boks/komponen logistik secara *real-time* di area workshop dan gudang, memangkas waktu pencarian perkakas dan mencegah kesalahan penempatan suku cadang industri.
-* **Mengembangkan Aplikasi Power Apps TMS (Tools Management System):** Merancang aplikasi internal terintegrasi untuk mendigitalisasi sirkulasi peminjaman perkakas teknis pabrik, memfasilitasi pencatatan checkout/checkin, serta meningkatkan akurasi audit inventaris kerja.
-* **Mengembangkan Aplikasi Power Apps IMS (Inventory Management System):** Membangun sistem inventaris digital untuk monitoring stok suku cadang dan material secara efisien dengan notifikasi batas minimum inventaris.
 
 #### **Bappeda Litbang Kota Palembang — Kota Palembang, Sumatera Selatan**
 *Web Developer Intern* | **Juli 2025 — Agustus 2025**
