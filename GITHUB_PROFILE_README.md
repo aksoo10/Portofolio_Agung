@@ -2,6 +2,10 @@
 
 <div align="center">
 
+<img src="assets/agung-aksa.png" width="160" height="160" style="border-radius: 50%; object-fit: cover; object-position: top center; border: 3px solid #6366f1; box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);" alt="Agung Aksa" />
+
+<br/><br/>
+
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Plus+Jakarta+Sans&weight=700&size=24&pause=1000&color=6366F1&center=true&vCenter=true&width=550&lines=Full-Stack+Web+Developer;Laravel+%26+PHP+Ecosystem+Specialist;D3+Manajemen+Informatika+UNSRI+(IPK+3.91))](https://git.io/typing-svg)
 
 <p align="center">
