@@ -70,3 +70,32 @@ body.modal-open {
 .project-card {
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
+
+/* --- Hamburger 3-Line Animated Icon --- */
+.hamburger-line {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.menu-active .hamburger-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.menu-active .hamburger-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* --- Mobile Navigation Drawer --- */
+#navLinks {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#mobileMenuBackdrop {
+  transition: opacity 0.25s ease;
+}
+

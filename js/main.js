@@ -109,13 +109,14 @@ function updateThemeIcon(theme) {
 }
 
 /* ==========================================================================
-   2. NAVBAR & NAVIGATION
+   2. NAVBAR & NAVIGATION (Garis 3 Mobile Drawer)
    ========================================================================== */
 function initNavbar() {
   const header = document.getElementById('header');
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navLinks = document.getElementById('navLinks');
-  const navItems = document.querySelectorAll('.nav-link');
+  const backdrop = document.getElementById('mobileMenuBackdrop');
+  const navItems = document.querySelectorAll('.nav-link, .mobile-nav-item');
 
   // Sticky header scroll shadow
   window.addEventListener('scroll', () => {
@@ -128,21 +129,55 @@ function initNavbar() {
     }
   });
 
-  // Mobile menu toggle
+  function openMobileMenu() {
+    if (!hamburgerBtn || !navLinks) return;
+    hamburgerBtn.classList.add('menu-active');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    navLinks.classList.remove('hidden');
+    navLinks.classList.add('flex');
+    if (backdrop) backdrop.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+  }
+
+  function closeMobileMenu() {
+    if (!hamburgerBtn || !navLinks) return;
+    hamburgerBtn.classList.remove('menu-active');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    navLinks.classList.add('hidden');
+    navLinks.classList.remove('flex');
+    if (backdrop) backdrop.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }
+
   if (hamburgerBtn && navLinks) {
-    hamburgerBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('hidden');
-      navLinks.classList.toggle('flex');
+    hamburgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = hamburgerBtn.classList.contains('menu-active');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
     });
+
+    if (backdrop) {
+      backdrop.addEventListener('click', closeMobileMenu);
+    }
 
     // Close mobile menu on click nav item
     navItems.forEach(link => {
       link.addEventListener('click', () => {
         if (window.innerWidth < 768) {
-          navLinks.classList.add('hidden');
-          navLinks.classList.remove('flex');
+          closeMobileMenu();
         }
       });
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && hamburgerBtn.classList.contains('menu-active')) {
+        closeMobileMenu();
+      }
     });
   }
 
@@ -171,14 +206,44 @@ function initNavbar() {
 }
 
 /* ==========================================================================
-   3. PROJECT FILTERING
+   3. PROJECT FILTERING (with Mobile 3-Line Filter Toggle)
    ========================================================================== */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
+  const mobileToggle = document.getElementById('mobileProjectFilterToggle');
+  const filtersContainer = document.getElementById('projectFiltersContainer');
+  const chevron = document.getElementById('projectFilterChevron');
+  const activeLabel = document.getElementById('activeProjectFilterLabel');
 
   const activeClasses = ['bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-500/25'];
   const inactiveClasses = ['bg-slate-100', 'dark:bg-[#182238]', 'text-slate-600', 'dark:text-slate-300', 'hover:bg-slate-200', 'dark:hover:bg-[#1f2c4a]'];
+
+  // Mobile Filter Toggle (garis 3)
+  if (mobileToggle && filtersContainer) {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = filtersContainer.classList.contains('hidden');
+      if (isHidden) {
+        filtersContainer.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+      } else {
+        filtersContainer.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close mobile filter dropdown if tapped outside
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth < 768 && !mobileToggle.contains(e.target) && !filtersContainer.contains(e.target)) {
+        filtersContainer.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -191,7 +256,24 @@ function initProjectFilters() {
       btn.classList.add(...activeClasses);
 
       const filterValue = btn.getAttribute('data-filter');
+      const labelSpan = btn.querySelector('span');
+      const countSpan = btn.querySelector('span:last-child');
+      
+      // Update mobile button label
+      if (activeLabel) {
+        const text = labelSpan ? labelSpan.textContent.trim() : btn.textContent.trim();
+        const count = countSpan && countSpan !== labelSpan ? ` (${countSpan.textContent.trim()})` : '';
+        activeLabel.textContent = `${text}${count}`;
+      }
 
+      // If on mobile, automatically collapse filter dropdown after selection
+      if (window.innerWidth < 768 && filtersContainer) {
+        filtersContainer.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+        if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+      }
+
+      // Filter project cards with smooth animation
       projectCards.forEach(card => {
         const category = card.getAttribute('data-category');
         if (filterValue === 'all' || category === filterValue) {
