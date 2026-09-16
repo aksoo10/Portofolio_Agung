@@ -1,0 +1,15 @@
+# Dependencies & OS files
+.DS_Store
+Thumbs.db
+node_modules/
+vendor/
+
+# Environment
+.env
+*.log
+
+# IDE & Editor
+.idea/
+.vscode/
+*.swp
+*.swo
