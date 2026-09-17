@@ -57,6 +57,24 @@ const projectsData = {
       hasRepo: true,
       note: 'Proyek Magang / Kerja Praktik Pemerintah Kota Palembang'
     }
+  },
+  'kegiatan-harian': {
+    title: 'Aplikasi Kegiatan Harian Pro',
+    company: 'Personal Project',
+    category: 'Productivity & Management Web App',
+    badge: 'Daily Routine & Habit Tracker',
+    problem: 'Mengelola rutinitas kegiatan harian, linimasa jadwal berbasis waktu, target kebiasaan mingguan, serta pencatatan finansial seringkali terpecah di banyak aplikasi berbeda, membutuhkan login akun rumit, serta bergantung pada server cloud eksternal.',
+    solution: 'Membangun aplikasi web manajemen produktivitas komprehensif dengan Kalender Bulanan interaktif 30/31 hari, Linimasa Jadwal Harian berkategori warna dan audio sintetis Web Audio API, Habit Tracker mingguan dengan evaluasi capaian otomatis, pelacak Keuangan & Tabungan bulanan, serta pencadangan data mandiri (JSON Backup & Restore).',
+    role: 'Solo Web Developer — Merancang arsitektur aplikasi SPA modular, mendesain antarmuka modern dark/light mode bernuansa glassmorphism responsif, mengelola persistensi state pada LocalStorage browser, serta mengimplementasikan skema impor/ekspor data JSON.',
+    techStack: ['JavaScript ES6+', 'HTML5 Semantic', 'CSS3 Glassmorphism', 'LocalStorage API', 'Web Audio API', 'JSON Backup & Restore'],
+    impact: 'Menghadirkan platform produktivitas dan finansial harian all-in-one yang mandiri, responsif, cepat, serta menjaga privasi pengguna dengan penyimpanan data 100% lokal di browser.',
+    image: 'assets/kegiatan-harian.png',
+    links: {
+      github: 'https://github.com/agungaksa',
+      demo: '#',
+      hasRepo: true,
+      note: 'Aplikasi Web Produktivitas & Manajemen Waktu Mandiri'
+    }
   }
 };
 
@@ -267,9 +285,9 @@ function initProjectFilters() {
       // Update mobile button label & counter
       if (activeLabel) {
         if (filterValue === 'all') {
-          activeLabel.textContent = 'Semua Proyek (3)';
+          activeLabel.textContent = 'Semua Proyek (4)';
         } else if (filterValue === 'web') {
-          activeLabel.textContent = 'Web Application (2)';
+          activeLabel.textContent = 'Web Application (3)';
         } else if (filterValue === 'academic') {
           activeLabel.textContent = 'Akademik & Tugas Akhir (1)';
         } else {

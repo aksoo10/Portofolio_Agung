@@ -33,6 +33,7 @@
 | **01** | **Website Box Locator** | PT Andritz (Internship) | PHP / Laravel, MySQL, Tailwind, JS | Pemetaan & pelacakan boks logistik workshop industri real-time |
 | **02** | **Sistem Pelepasan Alumni** | Fasilkom UNSRI (Tugas Akhir) | Laravel, PHP 8+, MySQL, Blade, DomPDF | Otomasi 100% verifikasi berkas yudisium & cetak dokumen kelulusan |
 | **03** | **Forum Pengaduan Kinerja OPD** | Bappeda Litbang Kota Palembang | PHP, MySQL, Tailwind CSS, JS | Digitalisasi kanal aduan dan transparansi disposisi tiket kinerja OPD |
+| **04** | **Aplikasi Kegiatan Harian Pro** | Personal Project (Productivity) | JavaScript ES6+, HTML5, CSS3, LocalStorage | Manajemen kalender bulanan, linimasa kegiatan harian & habit tracker |
 
 ---
 
