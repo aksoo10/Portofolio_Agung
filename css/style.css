@@ -121,5 +121,48 @@ body.modal-open {
   transform: rotate(90deg) scale(0.92);
 }
 
+/* --- Responsive Guarantee (Mobile & Tablet < 1024px) --- */
+@media screen and (max-width: 1023px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-nav-btn {
+    display: flex !important;
+  }
+  .desktop-cta {
+    display: none !important;
+  }
+  .desktop-filter-tabs {
+    display: none !important;
+  }
+  .mobile-filter-toggle {
+    display: block !important;
+  }
+  .cert-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+}
 
-
+@media screen and (min-width: 1024px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+  .mobile-nav-btn {
+    display: none !important;
+  }
+  .desktop-cta {
+    display: inline-flex !important;
+  }
+  .mobile-nav-drawer {
+    display: none !important;
+  }
+  #mobileMenuBackdrop {
+    display: none !important;
+  }
+  .mobile-filter-toggle {
+    display: none !important;
+  }
+  .desktop-filter-tabs {
+    display: flex !important;
+  }
+}

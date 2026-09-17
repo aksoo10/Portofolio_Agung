@@ -188,7 +188,7 @@ function initNavbar() {
 
     navItems.forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < 1024) {
           closeMobileMenu();
         }
       });
@@ -238,7 +238,7 @@ function initFilteringAndSearch() {
     });
 
     document.addEventListener('click', (e) => {
-      if (window.innerWidth < 768 && !mobileToggle.contains(e.target) && !filterTabs.contains(e.target)) {
+      if (window.innerWidth < 1024 && !mobileToggle.contains(e.target) && !filterTabs.contains(e.target)) {
         filterTabs.classList.add('hidden');
         if (chevron) chevron.classList.remove('rotate-180');
         mobileToggle.setAttribute('aria-expanded', 'false');
@@ -250,11 +250,16 @@ function initFilteringAndSearch() {
     let visibleCount = 0;
 
     cards.forEach(card => {
-      const category = card.getAttribute('data-category');
-      const searchData = (card.getAttribute('data-search') || '').toLowerCase();
+      const cardCategory = card.getAttribute('data-category');
+      const cardSearchData = (card.getAttribute('data-search') || '').toLowerCase();
+      const cardTitle = (card.querySelector('h3')?.textContent || '').toLowerCase();
+      const cardIssuer = (card.querySelector('.cert-issuer-name')?.textContent || '').toLowerCase();
 
-      const matchesCategory = currentCategory === 'all' || category === currentCategory;
-      const matchesSearch = !currentQuery || searchData.includes(currentQuery);
+      const matchesCategory = currentCategory === 'all' || cardCategory === currentCategory;
+      const matchesSearch = !currentQuery || 
+        cardSearchData.includes(currentQuery) || 
+        cardTitle.includes(currentQuery) || 
+        cardIssuer.includes(currentQuery);
 
       if (matchesCategory && matchesSearch) {
         card.classList.remove('hidden');
@@ -297,7 +302,7 @@ function initFilteringAndSearch() {
       }
 
       // Close mobile dropdown if on mobile
-      if (window.innerWidth < 768 && filterTabs) {
+      if (window.innerWidth < 1024 && filterTabs) {
         filterTabs.classList.add('hidden');
         if (chevron) chevron.classList.remove('rotate-180');
         if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');

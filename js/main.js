@@ -167,7 +167,7 @@ function initNavbar() {
     // Close mobile menu on click nav item
     navItems.forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < 1024) {
           closeMobileMenu();
         }
       });
@@ -237,7 +237,7 @@ function initProjectFilters() {
 
     // Close mobile filter dropdown if tapped outside
     document.addEventListener('click', (e) => {
-      if (window.innerWidth < 768 && !mobileToggle.contains(e.target) && !filtersContainer.contains(e.target)) {
+      if (window.innerWidth < 1024 && !mobileToggle.contains(e.target) && !filtersContainer.contains(e.target)) {
         filtersContainer.classList.add('hidden');
         if (chevron) chevron.classList.remove('rotate-180');
         mobileToggle.setAttribute('aria-expanded', 'false');
@@ -267,7 +267,7 @@ function initProjectFilters() {
       }
 
       // If on mobile, automatically collapse filter dropdown after selection
-      if (window.innerWidth < 768 && filtersContainer) {
+      if (window.innerWidth < 1024 && filtersContainer) {
         filtersContainer.classList.add('hidden');
         if (chevron) chevron.classList.remove('rotate-180');
         if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
