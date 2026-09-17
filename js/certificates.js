@@ -132,73 +132,37 @@ function updateThemeIcon(theme) {
 }
 
 /* ==========================================================================
-   2. NAVBAR & MOBILE MENU (Garis 3 Mobile Drawer)
+   2. NAVBAR & NAVIGATION (Mobile Filter Bar & Desktop Nav)
    ========================================================================== */
 function initNavbar() {
   const header = document.getElementById('header');
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const navLinks = document.getElementById('navLinks');
-  const backdrop = document.getElementById('mobileMenuBackdrop');
-  const navItems = document.querySelectorAll('.nav-link, .mobile-nav-item');
+  const mobileFilterBar = document.getElementById('mobileFilterBar');
+  const mobileFilterBtns = document.querySelectorAll('.mobile-filter-btn');
 
+  // Sticky header scroll shadow
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) {
-      header.classList.add('shadow-md', 'bg-white/90', 'dark:bg-[#0a0d14]/90');
-      header.classList.remove('bg-white/70', 'dark:bg-[#0a0d14]/70');
+    if (window.scrollY > 20) {
+      header?.classList.add('shadow-md', 'bg-white/95', 'dark:bg-[#0a0d14]/95');
+      header?.classList.remove('bg-white/80', 'dark:bg-[#0a0d14]/80');
     } else {
-      header.classList.remove('shadow-md', 'bg-white/90', 'dark:bg-[#0a0d14]/90');
-      header.classList.add('bg-white/70', 'dark:bg-[#0a0d14]/70');
+      header?.classList.remove('shadow-md', 'bg-white/95', 'dark:bg-[#0a0d14]/95');
+      header?.classList.add('bg-white/80', 'dark:bg-[#0a0d14]/80');
     }
-  });
+  }, { passive: true });
 
-  function openMobileMenu() {
-    if (!hamburgerBtn || !navLinks) return;
-    hamburgerBtn.classList.add('menu-active');
-    hamburgerBtn.setAttribute('aria-expanded', 'true');
-    navLinks.classList.remove('hidden');
-    navLinks.classList.add('flex');
-    if (backdrop) backdrop.classList.remove('hidden');
-    document.body.classList.add('overflow-hidden');
+  // Center active pill in horizontal scrollable filter bar
+  function centerActiveFilterBtn(btn) {
+    if (!mobileFilterBar || !btn) return;
+    const barRect = mobileFilterBar.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const scrollLeft = mobileFilterBar.scrollLeft + (btnRect.left - barRect.left) - (barRect.width / 2) + (btnRect.width / 2);
+    mobileFilterBar.scrollTo({ left: scrollLeft, behavior: 'smooth' });
   }
 
-  function closeMobileMenu() {
-    if (!hamburgerBtn || !navLinks) return;
-    hamburgerBtn.classList.remove('menu-active');
-    hamburgerBtn.setAttribute('aria-expanded', 'false');
-    navLinks.classList.add('hidden');
-    navLinks.classList.remove('flex');
-    if (backdrop) backdrop.classList.add('hidden');
-    document.body.classList.remove('overflow-hidden');
-  }
-
-  if (hamburgerBtn && navLinks) {
-    hamburgerBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = hamburgerBtn.classList.contains('menu-active');
-      if (isOpen) {
-        closeMobileMenu();
-      } else {
-        openMobileMenu();
-      }
-    });
-
-    if (backdrop) {
-      backdrop.addEventListener('click', closeMobileMenu);
-    }
-
-    navItems.forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth < 768) {
-          closeMobileMenu();
-        }
-      });
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && hamburgerBtn.classList.contains('menu-active')) {
-        closeMobileMenu();
-      }
-    });
+  // Auto-center the active certificates filter on load
+  const activeCertBtn = document.querySelector('.mobile-filter-btn[data-section="certificates"]');
+  if (activeCertBtn) {
+    setTimeout(() => centerActiveFilterBtn(activeCertBtn), 150);
   }
 }
 

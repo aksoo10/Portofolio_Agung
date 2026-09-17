@@ -90,7 +90,78 @@ body.modal-open {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-/* --- Mobile Navigation Drawer --- */
+/* --- Mobile Navigation Drawer & Safeties --- */
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 767.98px) {
+  .desktop-nav,
+  nav.desktop-nav {
+    display: none !important;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 120px;
+}
+
+@media (min-width: 768px) {
+  section[id] {
+    scroll-margin-top: 95px;
+  }
+}
+
+/* --- Mobile Nav Filter Bar (Horizontal Pill Navigation) --- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.mobile-filter-btn {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-btn:not(.active) {
+  background-color: rgba(241, 245, 249, 0.85);
+  color: #475569;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.dark .mobile-filter-btn:not(.active) {
+  background-color: rgba(17, 23, 38, 0.85);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-filter-btn:not(.active):hover {
+  border-color: #6366f1;
+  color: #4f46e5;
+}
+
+.dark .mobile-filter-btn:not(.active):hover {
+  border-color: #818cf8;
+  color: #c7d2fe;
+}
+
+.mobile-filter-btn.active {
+  background: linear-gradient(135deg, #4f46e5, #6366f1) !important;
+  color: #ffffff !important;
+  border-color: #6366f1 !important;
+  box-shadow: 0 4px 14px -2px rgba(99, 102, 241, 0.45);
+  font-weight: 700;
+}
+
+.mobile-filter-btn.active svg {
+  color: #ffffff !important;
+}
+
 #navLinks {
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
