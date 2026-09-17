@@ -89,7 +89,6 @@ let currentModalCertId = null;
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNavbar();
-  initFloatingMenu();
   initFilteringAndSearch();
   initModalListeners();
 });
@@ -457,92 +456,4 @@ function showToast(message) {
   }, 3000);
 }
 
-/* ==========================================================================
-   6. FLOATING QUICK NAVIGATION MENU (Ikon Gradasi Ungu)
-   ========================================================================== */
-function initFloatingMenu() {
-  const fabBtn = document.getElementById('fabMenuBtn');
-  const fabCard = document.getElementById('fabMenuCard');
-  const fabBackdrop = document.getElementById('fabMenuBackdrop');
-  const fabCloseBtn = document.getElementById('fabCardCloseBtn');
-  const fabNavItems = document.querySelectorAll('.fab-nav-item');
-  const fabThemeToggle = document.getElementById('fabThemeToggleBtn');
-
-  if (!fabBtn || !fabCard) return;
-
-  function openFabMenu() {
-    fabBtn.classList.add('active');
-    fabBtn.setAttribute('aria-expanded', 'true');
-    fabCard.classList.remove('hidden-card');
-    fabCard.classList.add('open-card');
-    if (fabBackdrop) fabBackdrop.classList.remove('hidden');
-  }
-
-  function closeFabMenu() {
-    fabBtn.classList.remove('active');
-    fabBtn.setAttribute('aria-expanded', 'false');
-    fabCard.classList.add('hidden-card');
-    fabCard.classList.remove('open-card');
-    if (fabBackdrop) fabBackdrop.classList.add('hidden');
-  }
-
-  fabBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = fabBtn.classList.contains('active');
-    if (isOpen) {
-      closeFabMenu();
-    } else {
-      openFabMenu();
-    }
-  });
-
-  if (fabCloseBtn) {
-    fabCloseBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      closeFabMenu();
-    });
-  }
-
-  if (fabBackdrop) {
-    fabBackdrop.addEventListener('click', closeFabMenu);
-  }
-
-  // Klik di luar floating menu untuk menutup
-  document.addEventListener('click', (e) => {
-    const container = document.getElementById('fabMenuContainer');
-    if (container && !container.contains(e.target) && fabBtn.classList.contains('active')) {
-      closeFabMenu();
-    }
-  });
-
-  // Tombol Escape keyboard
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && fabBtn.classList.contains('active')) {
-      closeFabMenu();
-    }
-  });
-
-  // Navigasi saat item menu diklik
-  fabNavItems.forEach(item => {
-    item.addEventListener('click', () => {
-      closeFabMenu();
-    });
-  });
-
-  // Theme toggle di dalam floating menu
-  if (fabThemeToggle) {
-    fabThemeToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const themeBtn = document.getElementById('themeToggleBtn');
-      if (themeBtn) {
-        themeBtn.click();
-      } else {
-        const isDark = document.documentElement.classList.contains('dark');
-        const newTheme = isDark ? 'light' : 'dark';
-        applyTheme(newTheme);
-        localStorage.setItem('portfolio-theme', newTheme);
-      }
-    });
-  }
-}
 
