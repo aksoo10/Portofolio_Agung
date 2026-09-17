@@ -212,7 +212,7 @@ function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
   const mobileToggle = document.getElementById('mobileProjectFilterToggle');
-  const filtersContainer = document.getElementById('projectFiltersContainer');
+  const mobileMenu = document.getElementById('projectFiltersMobileMenu');
   const chevron = document.getElementById('projectFilterChevron');
   const activeLabel = document.getElementById('activeProjectFilterLabel');
 
@@ -220,16 +220,18 @@ function initProjectFilters() {
   const inactiveClasses = ['bg-slate-100', 'dark:bg-[#182238]', 'text-slate-600', 'dark:text-slate-300', 'hover:bg-slate-200', 'dark:hover:bg-[#1f2c4a]'];
 
   // Mobile Filter Toggle (garis 3)
-  if (mobileToggle && filtersContainer) {
+  if (mobileToggle && mobileMenu) {
     mobileToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isHidden = filtersContainer.classList.contains('hidden');
+      const isHidden = mobileMenu.classList.contains('hidden');
       if (isHidden) {
-        filtersContainer.classList.remove('hidden');
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex');
         if (chevron) chevron.classList.add('rotate-180');
         mobileToggle.setAttribute('aria-expanded', 'true');
       } else {
-        filtersContainer.classList.add('hidden');
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
         if (chevron) chevron.classList.remove('rotate-180');
         mobileToggle.setAttribute('aria-expanded', 'false');
       }
@@ -237,8 +239,9 @@ function initProjectFilters() {
 
     // Close mobile filter dropdown if tapped outside
     document.addEventListener('click', (e) => {
-      if (window.innerWidth < 1024 && !mobileToggle.contains(e.target) && !filtersContainer.contains(e.target)) {
-        filtersContainer.classList.add('hidden');
+      if (window.innerWidth < 1024 && !mobileToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
         if (chevron) chevron.classList.remove('rotate-180');
         mobileToggle.setAttribute('aria-expanded', 'false');
       }
@@ -246,29 +249,42 @@ function initProjectFilters() {
   }
 
   filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const filterValue = btn.getAttribute('data-filter');
+
+      // Synchronize active classes on BOTH desktop and mobile filter buttons
       filterBtns.forEach(b => {
-        b.classList.remove(...activeClasses);
-        b.classList.add(...inactiveClasses);
+        if (b.getAttribute('data-filter') === filterValue) {
+          b.classList.remove(...inactiveClasses);
+          b.classList.add(...activeClasses);
+        } else {
+          b.classList.remove(...activeClasses);
+          b.classList.add(...inactiveClasses);
+        }
       });
 
-      btn.classList.remove(...inactiveClasses);
-      btn.classList.add(...activeClasses);
-
-      const filterValue = btn.getAttribute('data-filter');
-      const labelSpan = btn.querySelector('span');
-      const countSpan = btn.querySelector('span:last-child');
-      
-      // Update mobile button label
+      // Update mobile button label & counter
       if (activeLabel) {
-        const text = labelSpan ? labelSpan.textContent.trim() : btn.textContent.trim();
-        const count = countSpan && countSpan !== labelSpan ? ` (${countSpan.textContent.trim()})` : '';
-        activeLabel.textContent = `${text}${count}`;
+        if (filterValue === 'all') {
+          activeLabel.textContent = 'Semua Proyek (3)';
+        } else if (filterValue === 'web') {
+          activeLabel.textContent = 'Web Application (2)';
+        } else if (filterValue === 'academic') {
+          activeLabel.textContent = 'Akademik & Tugas Akhir (1)';
+        } else {
+          const labelSpan = btn.querySelector('span');
+          const countSpan = btn.querySelector('span:last-child');
+          const text = labelSpan ? labelSpan.textContent.trim() : btn.textContent.trim();
+          const count = countSpan && countSpan !== labelSpan ? ` (${countSpan.textContent.trim()})` : '';
+          activeLabel.textContent = `${text}${count}`;
+        }
       }
 
       // If on mobile, automatically collapse filter dropdown after selection
-      if (window.innerWidth < 1024 && filtersContainer) {
-        filtersContainer.classList.add('hidden');
+      if (mobileMenu) {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
         if (chevron) chevron.classList.remove('rotate-180');
         if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
       }
@@ -278,6 +294,7 @@ function initProjectFilters() {
         const category = card.getAttribute('data-category');
         if (filterValue === 'all' || category === filterValue) {
           card.classList.remove('hidden');
+          card.style.display = '';
           setTimeout(() => {
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
@@ -287,6 +304,7 @@ function initProjectFilters() {
           card.style.transform = 'translateY(16px)';
           setTimeout(() => {
             card.classList.add('hidden');
+            card.style.display = 'none';
           }, 250);
         }
       });
@@ -295,8 +313,17 @@ function initProjectFilters() {
 }
 
 /* ==========================================================================
-   4. PROJECT DETAIL MODAL
+   4. PROJECT DETAIL MODAL (Exposed Globally for Mobile & Desktop)
    ========================================================================== */
+window.openProjectDetail = function(projectId) {
+  const modalBackdrop = document.getElementById('projectModal');
+  const data = projectsData[projectId];
+  if (data && modalBackdrop) {
+    populateModal(data);
+    openModal(modalBackdrop);
+  }
+};
+
 function initProjectModal() {
   const modalBackdrop = document.getElementById('projectModal');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
@@ -305,13 +332,10 @@ function initProjectModal() {
   if (!modalBackdrop) return;
 
   detailBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const projectId = btn.getAttribute('data-project');
-      const data = projectsData[projectId];
-      if (data) {
-        populateModal(data);
-        openModal(modalBackdrop);
-      }
+      window.openProjectDetail(projectId);
     });
   });
 
@@ -331,34 +355,47 @@ function initProjectModal() {
 }
 
 function openModal(modal) {
+  if (!modal) return;
   modal.classList.remove('hidden');
   modal.classList.add('flex');
   document.body.classList.add('modal-open');
 }
 
 function closeModal(modal) {
+  if (!modal) return;
   modal.classList.add('hidden');
   modal.classList.remove('flex');
   document.body.classList.remove('modal-open');
 }
 
 function populateModal(data) {
-  document.getElementById('modalTitle').textContent = data.title;
-  document.getElementById('modalSubtitle').textContent = `${data.company} • ${data.category}`;
-  document.getElementById('modalProblem').textContent = data.problem;
-  document.getElementById('modalSolution').textContent = data.solution;
-  document.getElementById('modalRole').textContent = data.role;
-  document.getElementById('modalImpact').textContent = data.impact;
+  const titleEl = document.getElementById('modalTitle');
+  const subtitleEl = document.getElementById('modalSubtitle');
+  const problemEl = document.getElementById('modalProblem');
+  const solutionEl = document.getElementById('modalSolution');
+  const roleEl = document.getElementById('modalRole');
+  const impactEl = document.getElementById('modalImpact');
+
+  if (titleEl) titleEl.textContent = data.title;
+  if (subtitleEl) subtitleEl.textContent = `${data.company} • ${data.category}`;
+  if (problemEl) problemEl.textContent = data.problem;
+  if (solutionEl) solutionEl.textContent = data.solution;
+  if (roleEl) roleEl.textContent = data.role;
+  if (impactEl) impactEl.textContent = data.impact;
 
   // Render Tech Stack Pills
   const techContainer = document.getElementById('modalTechStack');
-  techContainer.innerHTML = '';
-  data.techStack.forEach(tech => {
-    const pill = document.createElement('span');
-    pill.className = 'px-3 py-1 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60';
-    pill.textContent = tech;
-    techContainer.appendChild(pill);
-  });
+  if (techContainer) {
+    techContainer.innerHTML = '';
+    if (Array.isArray(data.techStack)) {
+      data.techStack.forEach(tech => {
+        const pill = document.createElement('span');
+        pill.className = 'px-3 py-1 text-xs font-semibold rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60';
+        pill.textContent = tech;
+        techContainer.appendChild(pill);
+      });
+    }
+  }
 
   // Render Image Preview if available
   const imgContainer = document.getElementById('modalImageContainer');
@@ -375,8 +412,8 @@ function populateModal(data) {
 
   // Render Modal Note / Link
   const noteContainer = document.getElementById('modalNote');
-  if (noteContainer) {
-    noteContainer.textContent = data.links.note;
+  if (noteContainer && data.links) {
+    noteContainer.textContent = data.links.note || '';
   }
 }
 

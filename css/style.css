@@ -121,7 +121,7 @@ body.modal-open {
   transform: rotate(90deg) scale(0.92);
 }
 
-/* --- Responsive Guarantee (Mobile & Tablet < 1024px) --- */
+/* --- Responsive Guarantees --- */
 @media screen and (max-width: 1023px) {
   .desktop-nav {
     display: none !important;
@@ -131,15 +131,6 @@ body.modal-open {
   }
   .desktop-cta {
     display: none !important;
-  }
-  .desktop-filter-tabs {
-    display: none !important;
-  }
-  .mobile-filter-toggle {
-    display: block !important;
-  }
-  .cert-grid {
-    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
   }
 }
 
@@ -159,10 +150,5 @@ body.modal-open {
   #mobileMenuBackdrop {
     display: none !important;
   }
-  .mobile-filter-toggle {
-    display: none !important;
-  }
-  .desktop-filter-tabs {
-    display: flex !important;
-  }
 }
+

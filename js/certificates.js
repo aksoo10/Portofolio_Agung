@@ -228,10 +228,12 @@ function initFilteringAndSearch() {
       const isHidden = filterTabs.classList.contains('hidden');
       if (isHidden) {
         filterTabs.classList.remove('hidden');
+        filterTabs.classList.add('flex');
         if (chevron) chevron.classList.add('rotate-180');
         mobileToggle.setAttribute('aria-expanded', 'true');
       } else {
         filterTabs.classList.add('hidden');
+        filterTabs.classList.remove('flex');
         if (chevron) chevron.classList.remove('rotate-180');
         mobileToggle.setAttribute('aria-expanded', 'false');
       }
@@ -240,6 +242,7 @@ function initFilteringAndSearch() {
     document.addEventListener('click', (e) => {
       if (window.innerWidth < 1024 && !mobileToggle.contains(e.target) && !filterTabs.contains(e.target)) {
         filterTabs.classList.add('hidden');
+        filterTabs.classList.remove('flex');
         if (chevron) chevron.classList.remove('rotate-180');
         mobileToggle.setAttribute('aria-expanded', 'false');
       }
@@ -304,6 +307,7 @@ function initFilteringAndSearch() {
       // Close mobile dropdown if on mobile
       if (window.innerWidth < 1024 && filterTabs) {
         filterTabs.classList.add('hidden');
+        filterTabs.classList.remove('flex');
         if (chevron) chevron.classList.remove('rotate-180');
         if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
       }
