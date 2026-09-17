@@ -50,6 +50,11 @@ Lulusan **Diploma III Manajemen Informatika Universitas Sriwijaya (IPK 3.91 / 4.
   * *Teknologi:* PHP, MySQL, Tailwind CSS, JavaScript.
   * *Deskripsi:* Platform digital untuk penyampaian aduan, disposisi tugas, dan pelacakan status penanganan kendala kinerja antar instansi OPD Kota Palembang secara transparan.
 
+* **Aplikasi Kegiatan Harian Pro — Personal Project**
+  * *Teknologi:* JavaScript ES6+, HTML5 Semantic, CSS3 Glassmorphism, LocalStorage API, Web Audio API, JSON Backup.
+  * *Deskripsi:* Aplikasi web manajemen kegiatan dan produktivitas harian all-in-one yang dilengkapi kalender bulanan interaktif 30/31 hari, linimasa waktu, habit tracker mingguan, dan pencatatan keuangan bulanan.
+  * *Fitur & Dampak:* Berjalan 100% di sisi klien (client-side) tanpa dependensi server luar, menjaga privasi data pengguna dengan persistensi LocalStorage, dan mendukung pencadangan data mandiri via file JSON.
+
 ---
 
 ### **RIWAYAT PENDIDIKAN**

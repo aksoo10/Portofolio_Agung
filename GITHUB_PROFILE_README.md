@@ -58,7 +58,11 @@
    - *Public Sector complaint & ticketing platform developed for Bappeda Litbang Kota Palembang.*
    - Transparent digital ticketing and performance monitoring system built with **PHP, MySQL, and Tailwind CSS**.
 
-4. **[Portofolio-Agung](https://github.com/agungaksa)**
+4. **[Kegiatan-Harian-Pro](https://github.com/agungaksa)**
+   - *Comprehensive web-based daily routine, habit tracker & personal finance management app.*
+   - Built with modern **JavaScript ES6+, LocalStorage API, Web Audio API, and CSS3 Glassmorphism**.
+
+5. **[Portofolio-Agung](https://github.com/agungaksa)**
    - *Modern, high-performance responsive personal portfolio website.*
    - Featuring dark/light modes, project case study modals, real-time filtering, and clean design system.
 
