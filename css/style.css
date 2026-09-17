@@ -99,3 +99,173 @@ body.modal-open {
   transition: opacity 0.25s ease;
 }
 
+/* ==========================================================================
+   FLOATING QUICK NAVIGATION MENU (Ikon Gradasi Ungu)
+   ========================================================================== */
+
+/* Container Tombol Melayang */
+.fab-menu-wrapper {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Tombol Melayang Utama */
+.fab-menu-btn {
+  position: relative;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.35), 0 8px 10px -6px rgba(147, 51, 234, 0.2);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1.5px solid rgba(168, 85, 247, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .fab-menu-btn {
+  background: rgba(17, 23, 38, 0.92);
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 0 10px 30px -5px rgba(147, 51, 234, 0.45), 0 0 15px rgba(168, 85, 247, 0.2);
+}
+
+.fab-menu-btn:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 20px 35px -5px rgba(147, 51, 234, 0.5), 0 0 20px rgba(168, 85, 247, 0.3);
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+.fab-menu-btn:active {
+  transform: scale(0.96);
+}
+
+/* Efek Riak Cahaya / Pulse Glow */
+.fab-menu-btn::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  opacity: 0.2;
+  z-index: -1;
+  animation: fabPulse 2.5s infinite ease-out;
+}
+
+@keyframes fabPulse {
+  0% { transform: scale(0.95); opacity: 0.35; }
+  50% { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+/* Ikon Transisi (Menu <-> Close) */
+.fab-icon-menu,
+.fab-icon-close {
+  position: absolute;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fab-icon-close {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+.fab-menu-btn.active .fab-icon-menu {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+.fab-menu-btn.active .fab-icon-close {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Kartu Pop-up Menu Navigasi */
+.fab-menu-card {
+  margin-bottom: 1rem;
+  width: 22rem;
+  max-width: calc(100vw - 2.5rem);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25), 0 0 30px rgba(147, 51, 234, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform-origin: bottom right;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .fab-menu-card {
+  background: rgba(13, 18, 31, 0.95);
+  border-color: rgba(168, 85, 247, 0.25);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 35px rgba(147, 51, 234, 0.2);
+}
+
+/* State Buka / Tutup Card */
+.fab-menu-card.hidden-card {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.88) translateY(16px);
+  visibility: hidden;
+}
+
+.fab-menu-card.open-card {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1) translateY(0);
+  visibility: visible;
+}
+
+/* Item Link di dalam Floating Menu */
+.fab-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  color: #334155;
+}
+
+.dark .fab-nav-item {
+  color: #e2e8f0;
+}
+
+.fab-nav-item:hover {
+  background: rgba(147, 51, 234, 0.08);
+  color: #7e22ce;
+  transform: translateX(4px);
+}
+
+.dark .fab-nav-item:hover {
+  background: rgba(168, 85, 247, 0.12);
+  color: #c084fc;
+}
+
+.fab-nav-item.active-section {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.12), rgba(99, 102, 241, 0.12));
+  color: #7e22ce;
+  border-left: 3px solid #9333ea;
+}
+
+.dark .fab-nav-item.active-section {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(99, 102, 241, 0.18));
+  color: #c084fc;
+  border-left: 3px solid #c084fc;
+}
+
+
